@@ -9,8 +9,11 @@ def fetch_user(username):
     script_tag = soup.find("script", id="__UNIVERSAL_DATA_FOR_REHYDRATION__")             # Find script tag with data
     json_str = script_tag.string                                                          # Get the string of content in the script tag
     data = json.loads(json_str)                                                           # Use json to turn it from a string to a dictionary
-    target = data["__DEFAULT_SCOPE__"]["webapp.user-detail"]["userInfo"].get("user")      # Isolate the user data
-    return target                                                                         # Return it to end the function
+    target = data["__DEFAULT_SCOPE__"]["webapp.user-detail"]["userInfo"]                  # Isolate the user data
+    user = target.get("user")                                                             # User dictionary
+    stats = target.get("stats")                                                           # Stats dictionary
+    user.update(stats)                                                                    # Combine both dictionaries of data
+    return user                                                                           # Return data to end the function
 
 
 data = fetch_user("theonly5a3k")
