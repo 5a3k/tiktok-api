@@ -14,3 +14,4 @@ def fetch_user(username):
 
 
 data = fetch_user("theonly5a3k")
+print(data)
